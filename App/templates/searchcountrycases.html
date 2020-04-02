@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} CoronaVirus Tracker {% endblock %}
+{% block body %} 
+
+    <div class="container">
+      <div class="container d-flex justify-content-center">
+        <form method="post" action="/showcountrycases/" name="myform">{% csrf_token %}
+          <div class="form-group mt-2">
+            <label for="countryname" class="ml-1 text-dark"><b>Country Name</label>
+            <input type="text" class="form-control text-center" id="countryname" name="countryname" value="">
+          </div>
+          <div>
+              <button class="btn btn-dark">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+{% endblock %}}

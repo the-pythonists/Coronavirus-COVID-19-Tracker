@@ -20,4 +20,12 @@ from App import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name='index'),
-]
+    path('searchbycountry/',views.searchbycountry,name='searchbycountry'),
+    path('showcountrycases/',views.showcountrycases,name='showcountrycases'),
+    path('indiastatewise/',views.indiastatewise,name='indiastatewise'),
+    path('indiadistrictwise/<str:city>/',views.indiadistrictwise,name='indiadistrictwise'),
+    path('countrywise/',views.countrywise,name='countrywise'),
+    path('contactus/',views.contactus,name='contactus'),
+    path('map/',views.map,name='map'),
+    path('graphCountryCases/',views.graphCountryCases,name='graphCountryCases'),
+] 
