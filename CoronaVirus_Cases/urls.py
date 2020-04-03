@@ -25,6 +25,7 @@ urlpatterns = [
     path('indiastatewise/',views.indiastatewise,name='indiastatewise'),
     path('indiadistrictwise/<str:city>/',views.indiadistrictwise,name='indiadistrictwise'),
     path('countrywise/',views.countrywise,name='countrywise'),
+    path('population/',views.population,name='population'),
     path('contactus/',views.contactus,name='contactus'),
     path('map/',views.map,name='map'),
     path('graph/',views.graph,name='graph'),

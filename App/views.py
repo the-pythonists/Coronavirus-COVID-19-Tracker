@@ -71,3 +71,8 @@ def graph(request):
 	plt.xticks(a,countries[185:],rotation=50,fontsize=8)
 	#plt.savefig('D:\\Coronavirus-COVID-19-Tracker\\App\\static\\images\\photo.png')
 	return render(request,"graphrepresentation.html")
+
+def population(request):
+	popu = Coronavirus_Cases.worldPopulation()
+	param = {"detail":popu}
+	return render (request,'population.html',param)
