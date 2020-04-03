@@ -13,11 +13,11 @@ def index(request):
 				recovered = case[2]
 				newcases = case[3]
 				newdeaths = case[4]'''
-	confirmed = 2356
-	death = 7326
-	recovered = 82
+	confirmed = 10167932356
+	death = 53245
+	recovered = 213164
 	newcases = 722
-	newdeaths = 762
+	newdeaths = 362
 	casedetail = {'confirmed':confirmed,'death':death,'recovered':recovered,'newcases':newcases,'newdeaths':newdeaths}
 	return render (request,'index.html',casedetail)
 
@@ -53,8 +53,9 @@ def contactus(request):
 def map(request):
 	return render(request,"map.html")
 
-def graphCountryCases(request):
-	case = Coronavirus_Cases.countryCasesGraph()
+def graph(request):
+	case = Coronavirus_Cases.TotalCasesGraph()
+	Deathcases = Coronavirus_Cases.TotalDeathsGraph()
 	total_cases = case[0]
 	countries = case[1]
 	total_cases.reverse()
@@ -62,10 +63,10 @@ def graphCountryCases(request):
 	tc = [int(b) for b in total_cases]
 	col=['r','g','b','y','c']
 	a=np.arange(len(countries[185:]))
-	plt.bar(a,total_cases[185:],color=col,edgecolor='black')
-	plt.xlabel('Total Cases')
+	plt.bar(a,tc[185:],color=col,edgecolor='black')
+	plt.xlabel('Countries')
 	plt.title('Graph')
-	plt.ylabel('Countries')
+	plt.ylabel('Total Cases')
 	plt.legend(col,countries[185:],loc=1,ncol=10,borderpad=1,shadow=True,framealpha=1,frameon=True,)
 	plt.xticks(a,countries[185:],rotation=50,fontsize=8)
 	#plt.savefig('D:\\Coronavirus-COVID-19-Tracker\\App\\static\\images\\photo.png')

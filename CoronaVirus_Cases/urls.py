@@ -27,5 +27,5 @@ urlpatterns = [
     path('countrywise/',views.countrywise,name='countrywise'),
     path('contactus/',views.contactus,name='contactus'),
     path('map/',views.map,name='map'),
-    path('graphCountryCases/',views.graphCountryCases,name='graphCountryCases'),
+    path('graph/',views.graph,name='graph'),
 ] 
