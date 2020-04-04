@@ -1,6 +1,6 @@
 function updateMap() {
     console.log("Updating map with realtime data")
-    fetch("/data.json")
+    fetch("/static/js/data.json")
         .then(response => response.json())
         .then(rsp => {
             // console.log(rsp.data)
@@ -17,6 +17,14 @@ function updateMap() {
                     color = `rgb(${cases}, 0, 0)`;
                 }
 
+                recoverd = element.recovered;
+                if (recoverd>100){
+                    color = "rgb(255,255,0)";
+                }
+
+                else{
+                    color = `rgb(${recoverd}, 0, 0)`;
+                }
                 // Mark on the map
                 new mapboxgl.Marker({
                     draggable: false,
