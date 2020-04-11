@@ -2,6 +2,6 @@
 
 This project is simply based on coronavirus tracker.  
 
-![Alt Text](D:\\Coronavirus-COVID-19-Tracker\\App\\static\\images\\coronavirus.jpg)
+![Alt Text](https://images.app.goo.gl/xeWwcR6wfRWVwJtw8)
 
 ***Note:-*** In this project, APIs is used for showing information. 
