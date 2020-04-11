@@ -2,6 +2,6 @@
 
 This project is simply based on coronavirus tracker.  
 
-![Alt Text](https://images.app.goo.gl/xeWwcR6wfRWVwJtw8)
+![Alt Text](![Alt text](/relative/path/to/coronavirus.jpg?raw=true "Corona"))
 
 ***Note:-*** In this project, APIs is used for showing information. 
