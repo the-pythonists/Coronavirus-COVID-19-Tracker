@@ -2,7 +2,9 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from App import Coronavirus_Cases
 import requests
+import pandas as pd
 from matplotlib import pyplot as plt
+import seaborn as sns
 import numpy as np
 # Create your views here.
 
@@ -75,4 +77,79 @@ def graph(request):
 def population(request):
 	popu = Coronavirus_Cases.worldPopulation()
 	param = {"detail":popu}
-	return render (request,'population.html',param)
+	return render(request,'population.html',param)
+
+def futurecases(request):
+	if request.method == 'POST':
+		countryName = request.POST.get('countryname')
+		country = countryName.capitalize()
+		data = Coronavirus_Cases.possible_future_cases(country)
+		param = {"detail":data}
+		return render(request,"possiblefuturecases.html",param)
+	return render(request,"possiblefuturecases.html")
+
+def graph2(request):
+	if request.method == 'POST':
+		countryName = request.POST.get('countryname')
+		country = countryName.capitalize()
+		case = Coronavirus_Cases.WeeklyWiseGraph(country)
+		total_cases = case[1]
+		dates = case[0]
+		dta = {'dates':dates,'total_cases':total_cases}
+		df = pd.DataFrame(dta)
+		g = sns.lineplot(x='dates', y='total_cases', data=df)
+		g.set_title('Weekly Cases graph')
+		plt.setp(g.get_xticklabels(), rotation=30)
+		#g.figure.savefig("D:\\Coronavirus-COVID-19-Tracker\\App\\static\\images\\Weekly_Graph.png")
+		return render(request,"graphrepresentation2.html")
+	return render(request,"graphrepresentation2.html")
+
+def graph3(request):
+	if request.method == 'POST':
+		countryName = request.POST.get('countryname')
+		country = countryName.capitalize()
+		case = Coronavirus_Cases.MonthlyWiseGraph(country)
+		total_cases = case[1]
+		dates = case[0]
+		dta = {'dates':dates,'total_cases':total_cases}
+		df = pd.DataFrame(dta)
+		g = sns.lineplot(x='dates', y='total_cases', data=df)
+		g.set_title('Monthly Cases graph')
+		plt.setp(g.get_xticklabels(), rotation=45)
+		#g.figure.savefig("D:\\Coronavirus-COVID-19-Tracker\\App\\static\\images\\Monthly_Graph.png")
+		return render(request,"graphrepresentation3.html")
+	return render(request,"graphrepresentation3.html")
+
+def graph4(request):
+	if request.method == 'POST':
+		countryName = request.POST.get('countryname')
+		country = countryName.capitalize()
+		case = Coronavirus_Cases.YearlyWiseGraph(country)
+		total_cases = case[1]
+		dates = case[0]
+		dta = {'dates':dates,'total_cases':total_cases}
+		df = pd.DataFrame(dta)
+		g = sns.lineplot(x='dates', y='total_cases', data=df)
+		g.set_title('Yearly Cases graph')
+		plt.setp(g.get_xticklabels(), rotation=45)
+		#g.figure.savefig("D:\\Coronavirus-COVID-19-Tracker\\App\\static\\images\\Yearly_Graph.png")
+		return render(request,"graphrepresentation4.html")
+	return render(request,"graphrepresentation4.html")
+
+def graph5(request):
+	if request.method == 'POST':
+		countryName = request.POST.get('countryname')
+		country = countryName.capitalize()
+		case = Coronavirus_Cases.DayWiseGraph(country)
+		total_cases = case[1]
+		time = case[0]
+		date = case[2]
+		dta = {'times':time,'total_cases':total_cases}
+		df = pd.DataFrame(dta)
+		g = sns.lineplot(x='times', y='total_cases', data=df)
+		g.set_title('Day Cases graph')
+		plt.setp(g.get_xticklabels(), rotation=45)
+		#g.figure.savefig("D:\\Coronavirus-COVID-19-Tracker\\App\\static\\images\\Day_Graph.png")
+		param = {'date':date[0]}
+		return render(request,"graphrepresentation5.html",param)
+	return render(request,"graphrepresentation5.html")

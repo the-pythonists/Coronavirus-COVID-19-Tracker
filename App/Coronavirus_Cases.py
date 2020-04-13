@@ -145,3 +145,98 @@ def worldPopulation():
         k = [j[i] for i in select_list if i in j]
         population.append(k)  
     return population
+
+def possible_future_cases(country):
+    url = "https://coronavirus-info.p.rapidapi.com/futurecasesbycountry"
+    querystring = {"name":country}
+    headers = {
+    'x-rapidapi-host': "coronavirus-info.p.rapidapi.com",
+    'x-rapidapi-key': "Your API Key"
+    }
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    x = response.json()
+    future_cases = x['future_cases']
+    select_list = ['date','total_cases','total_deaths','total_recovered']
+    futurecases = []
+    for j in future_cases:
+        k = [j[i] for i in select_list if i in j]
+        futurecases.append(k)
+    return futurecases
+
+def WeeklyWiseGraph(country):
+    url = "https://coronavirus-map.p.rapidapi.com/v1/spots/week"
+    querystring = {"region":country}
+    headers = {
+    'x-rapidapi-host': "coronavirus-map.p.rapidapi.com",
+    'x-rapidapi-key': "Your API Key"
+    }
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    x = response.json()
+    y = x['data']
+    dates = []; cases = []; tot_cases = []
+    for key in y.keys(): 
+        dates.append(key)
+    for value in y.values():
+        cases.append(value)
+    for case in cases:
+        tot_cases.append(case['total_cases'])
+    return dates,tot_cases
+
+def MonthlyWiseGraph(country):
+    url = "https://coronavirus-map.p.rapidapi.com/v1/spots/month"
+    querystring = {"region":country}
+    headers = {
+    'x-rapidapi-host': "coronavirus-map.p.rapidapi.com",
+    'x-rapidapi-key': "Your API Key"
+    }
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    x = response.json()
+    y = x['data']
+    dates = []; cases = []; tot_cases = []
+    for key in y.keys(): 
+        dates.append(key)
+    for value in y.values():
+        cases.append(value)
+    for case in cases:
+        tot_cases.append(case['total_cases'])
+    return dates,tot_cases
+
+def YearlyWiseGraph(country):
+    url = "https://coronavirus-map.p.rapidapi.com/v1/spots/year"
+    querystring = {"region":country}
+    headers = {
+    'x-rapidapi-host': "coronavirus-map.p.rapidapi.com",
+    'x-rapidapi-key': "Your API Key"
+    }
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    x = response.json()
+    y = x['data']
+    dates = []; cases = []; tot_cases = []
+    for key in y.keys(): 
+        dates.append(key)
+    for value in y.values():
+        cases.append(value)
+    for case in cases:
+        tot_cases.append(case['total_cases'])
+    return dates,tot_cases
+
+def DayWiseGraph(country):
+    url = "https://coronavirus-map.p.rapidapi.com/v1/spots/day"
+    querystring = {"region":country}
+    headers = {
+    'x-rapidapi-host': "coronavirus-map.p.rapidapi.com",
+    'x-rapidapi-key': "Your API Key"
+    }
+    response = requests.request("GET", url, headers=headers, params=querystring)
+    x = response.json()
+    y = x['data']
+    dates = []; cases = []; tot_cases = []; time = []
+    for key in y.keys():
+        dates.append(key[:10])
+        time.append(key[10:])
+    date = list(set(dates))
+    for value in y.values():
+        cases.append(value)
+    for case in cases:
+        tot_cases.append(case['total_cases'])
+    return time,tot_cases,date

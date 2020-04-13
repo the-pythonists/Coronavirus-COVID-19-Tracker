@@ -27,6 +27,11 @@ urlpatterns = [
     path('countrywise/',views.countrywise,name='countrywise'),
     path('population/',views.population,name='population'),
     path('contactus/',views.contactus,name='contactus'),
+    path('futurecases/',views.futurecases,name='futurecases'),
     path('map/',views.map,name='map'),
     path('graph/',views.graph,name='graph'),
+    path('graph2/',views.graph2,name='graph2'),
+    path('graph3/',views.graph3,name='graph3'),
+    path('graph4/',views.graph4,name='graph4'),
+    path('graph5/',views.graph5,name='graph5'),
 ] 
