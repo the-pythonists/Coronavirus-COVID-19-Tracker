@@ -22,5 +22,11 @@ urlpatterns = [
     path('',views.index,name='index'),
     path('worlddata/',views.worlddata,name='worlddata'),
     path('map/<str:m>',views.map,name='map'),
+    path('graphOne/',views.graphOne,name='graphOne'),
+    path('graphTwo/',views.graphTwo,name='graphTwo'),
+    path('graphThree/',views.graphThree,name='graphThree'),
+    path('graphFour/',views.graphFour,name='graphFour'),
+    path('graphFive/',views.graphFive,name='graphFive'),
+    path('graph/',views.graph,name='graph'),
 
 ] 
