@@ -172,5 +172,58 @@ def graphFive(request):
 	result = json.dumps(params)
 	return HttpResponse(result)
 
+def globe(request):
+	return render(request,"globe.html")
+
+def Sort(allData): 
+    allData.sort(key = lambda i: i["country_name"]) 
+    return allData 
+
+def globe_data(request):
+	url = "https://corona-virus-world-and-india-data.p.rapidapi.com/api"
+	headers = {
+		'x-rapidapi-host': "corona-virus-world-and-india-data.p.rapidapi.com",
+		'x-rapidapi-key': "8a535ee783mshca57265aad44eb9p18617fjsnce3f1f61eb7c"
+		}
+	response = requests.request("GET", url, headers=headers)
+	x = response.json()
+	allData = x['countries_stat']
+	countrywiseSort = Sort(allData)
+	RemainingData = countrywiseSort[1:]
+	confirmed = []; active = []; recovered = []; dead = []; states = []
+	for k in RemainingData:
+		statesName = k['country_name']
+		confirmedCases = k['cases'].replace(",","")
+		activeCases = k['active_cases'].replace(",","")
+		recoveredCases = k['total_recovered'].replace(",","")
+		deathCases = k['deaths'].replace(",","")
+		states.append(statesName)
+		confirmed.append(confirmedCases)
+		active.append(activeCases)
+		recovered.append(recoveredCases)
+		dead.append(deathCases)
+	con = [int(p) for p in confirmed]
+	act = [int(q) for q in active]
+	#rec = [int(r) for r in recovered]
+	dea = [int(s) for s in dead]
+	countries_iso = ["AF","AL","DZ","AD","AO","AI","AG","AR","AM","AW","AU","AT","AZ","BS","BH","BD","BB","BY","BE","BZ","BJ","BM","BT","BO","BA","BW","BR","VG","BN","BG","BF","BI","CF","CV","KH","CM","CA","BQ","KY","TD","GB","CL","CN","CO","CG","CR","HR","CU","CW","CY","CZ","CD","DK","DJ","DM","DO","EC","EG","SV","GQ","ER","EE","SZ","ET","FO","FK","FJ","FI","FR","GF","PF","TF","GA","GM","GE","DE","GH","GI","GR","GL","GD","GP","GT","GN","GW","GY","HT","HN","HK","HU","IS","IN","ID","IR","IQ","IE","IM","IL","IT","CI","JM","JP","JO","KZ","KE","KW","KG","LA","LV","LB","LR","LY","LI","LT","LU","","MO","MG","MW","MY","MV","ML","MT","MQ","MR","MU","YT","MX","MD","MC","MN","ME","MS","MA","MZ","MM","NA","NP","NL","NC","NZ","NI","NE","NG","MK","NO","OM","PK","PS","PA","PG","PY","PE","PH","PL","PT","QA","RO","RU","RW","RE","KR","KN","LC","MF","PM","SM","ST","SA","SN","RS","SC","SL","SG","SX","SK","SI","SO","ZA","SS","ES","LK","BL","VC","SD","SR","SE","CH","SY","TW","TZ","TH","TL","TG","TT","TN","TR","TC","AE","GB","US","UG","UA","UY","UZ","VA","VE","VN","EH","YE","ZM","ZW"]
+	confirmedList = []; activeList = []; recoveredList = []; deadList = []
+	for i in range(0,len(countries_iso)):
+		confirmedList.append({""+countries_iso[i]+"" : con[i]})
+	for i in range(0,len(countries_iso)):
+		activeList.append({""+countries_iso[i]+"" : act[i]})
+	for i in range(0,len(countries_iso)):
+		deadList.append({""+countries_iso[i]+"" : dea[i]})
+	mergedConfirmed={}; mergeActive = {}; mergeDead = {}
+	for x1 in confirmedList:
+		mergedConfirmed.update(x1)
+	for x2 in activeList:
+		mergeActive.update(x2)
+	for x3 in deadList:
+		mergeDead.update(x3)
+	params = {"confirmed":mergedConfirmed,"active":mergeActive,"deaths":mergeDead}
+	result = json.dumps(params)
+	return HttpResponse(result)
+
 def graph(request):
 	return render(request,"graphs.html")

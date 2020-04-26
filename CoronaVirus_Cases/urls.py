@@ -28,5 +28,6 @@ urlpatterns = [
     path('graphFour/',views.graphFour,name='graphFour'),
     path('graphFive/',views.graphFive,name='graphFive'),
     path('graph/',views.graph,name='graph'),
-
+    path('globe/',views.globe,name='globe'),
+    path('globe_data/',views.globe_data,name='globe_data'),
 ] 

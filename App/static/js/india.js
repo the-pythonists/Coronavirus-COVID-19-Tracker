@@ -33,7 +33,6 @@ function updateIndiaMap(){
             tot_deaths = data[0]['deaths']
             tot_recoverd = data[0]['recovered']
              // document.getElementById('smname').innerHTML = tot_confirmed;
-             console.log(tot_active)
             statesData.forEach(element => {
                 stateName = element.state;
                 totalCases = element.confirmed;
