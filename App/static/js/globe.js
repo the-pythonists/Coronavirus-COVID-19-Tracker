@@ -170,7 +170,7 @@ am4core.ready(function() {
         if (count > 0) {
           var polygon = measelsSeries.mapPolygons.create();
           polygon.multiPolygon = am4maps.getCircle(mapPolygon.visualLongitude, mapPolygon.visualLatitude, Math.max(0.2, Math.log(count) * Math.LN10 / 10));
-          polygon.tooltipText = "Confirmed : " + count+"\n"+ "Active : " + count2+"\n"+ "Deaths : " + count3;
+          polygon.tooltipText = mapPolygon.dataItem.dataContext.name + "\n" +"Confirmed : " + count+"\n"+ "Active : " + count2+"\n"+ "Deaths : " + count3;
           mapPolygon.dummyData = polygon;
           polygon.events.on("over", function () {
             mapPolygon.isHover = true;
